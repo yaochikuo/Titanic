@@ -1,15 +1,12 @@
-
+import numpy as np
+np.random.seed(1337) # for reproducibility
 from Titanic_keras_sub_function import data_pre_process, deepNN
-
 
 x_train,y_train,x_test,y_test=data_pre_process()
 
-score_list=[]
-for i in range(100):
-    score=deepNN(x_train,y_train,x_test,y_test)
-    score_list.append(score)
-    print("i=%d , score=%.2f" %(i,score))
+y_test=deepNN(x_train,y_train,x_test,y_test)
 
-print("score_list",score_list)
-print("average_correct_rate=",sum(score_list)/len(score_list))
+for i in range(len(y_test)):
+    print("Passenger ID=%d Survived=%d" %(i+892,int(np.round(y_test[i]))))
+
 
